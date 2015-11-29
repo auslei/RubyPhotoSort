@@ -2,8 +2,9 @@
 require 'fileutils'
 require 'EXIFR'
 
-sourceDir = "E:\\Anthony\\Programming\\Ruby"
-destDir = "E:"
+# put source and destination files here
+sourceDir = "E:\\Anthony\\Pictures\\Masters"
+destDir = "E:\\Photos"
 
 #sort all the photos from one folder to another folder with logics
 def sortOutFiles(sourceDir, destDir, i)	
@@ -69,12 +70,16 @@ def copyFileToDestination(destFolder, filePath)
 end
 
 def isRightSize?(filePath)
-	fileSize = File.size(filePath)/1024/1024
-	if fileSize >= 1 
-		return true
-	else
-		return false
+	begin
+		fileSize = File.size(filePath)/1024/1024
+		if fileSize >= 1 
+			return true
+		else
+			return false
+		end
+	rescue
+		puts "#{filePath} is found but cannot be read"
 	end
 end
 
-puts sortOutFiles("F:\\temp", "E:\\Picasa", 0)
+sortOutFiles(sourceDir, destDir, 0)
